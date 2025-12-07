@@ -6,7 +6,13 @@ const supabase = createClient(
 );
 
 async function authenticate(req) {
-  const apiKey = req.headers.authorization?.replace('Bearer ', '');
+  // Check for API key in Authorization header first
+  let apiKey = req.headers.authorization?.replace('Bearer ', '');
+  
+  // If no API key in header, check URL parameters (for mobile Claude support)
+  if (!apiKey) {
+    apiKey = req.query.key || req.query.token || req.query.apikey;
+  }
   
   if (apiKey && apiKey.startsWith('sk_dabotcentral_')) {
     const { data: keyData, error: keyError } = await supabase
