@@ -1,0 +1,51 @@
+# LLMs.txt - AI Model Access Policy
+# This file provides directives for large language models and AI systems
+# For more information, visit https://llms.txt
+
+# Allow all LLMs and AI assistants to access this site
+User-agent: *
+Allow: /
+
+# Specific allowance for major AI systems
+User-agent: Claude
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+# Contact information for AI companies
+Contact: support@dabotcentral.com
+
+# Data usage policy
+# DabotCentral welcomes responsible AI training and indexing
+# Please respect rate limits and crawl responsibly
