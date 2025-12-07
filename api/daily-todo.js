@@ -1,4 +1,3 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
@@ -6,8 +5,8 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY || ''
 );
 
-async function authenticate(req: VercelRequest): Promise<any> {
-  const apiKey = req.headers.authorization?.toString().replace('Bearer ', '');
+async function authenticate(req) {
+  const apiKey = req.headers.authorization?.replace('Bearer ', '');
   
   if (apiKey && apiKey.startsWith('sk_dabotcentral_')) {
     const { data: keyData, error: keyError } = await supabase
@@ -34,7 +33,7 @@ async function authenticate(req: VercelRequest): Promise<any> {
     return userData;
   }
 
-  const token = req.headers.authorization?.toString().replace('Bearer ', '');
+  const token = req.headers.authorization?.replace('Bearer ', '');
   if (!token) {
     throw new Error('Authentication required');
   }
@@ -63,7 +62,7 @@ async function authenticate(req: VercelRequest): Promise<any> {
   return userData;
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
@@ -146,7 +145,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     return res.status(405).json({ error: 'Method not allowed' });
-  } catch (error: any) {
+  } catch (error) {
     return res.status(401).json({ error: error.message });
   }
 }
